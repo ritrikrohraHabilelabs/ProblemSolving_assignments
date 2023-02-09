@@ -1,3 +1,6 @@
+//@param {Array} arr
+//@param {Number} prod
+ 
 function productConsecutive(arr, prod){
     let length = arr.length;
     let tempProd = 1

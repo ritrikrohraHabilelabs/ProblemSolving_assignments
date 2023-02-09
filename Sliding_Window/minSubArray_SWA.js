@@ -1,4 +1,4 @@
-//-----SLIDING WINDOW APPROACH-----
+//-----SWA - SLIDING WINDOW APPROACH-----
 
 //@param {Array} arr , accepts an array of length equal or greater than 'k'
 //@param (Number) k , accepts a number that denotes length of subArray
@@ -10,8 +10,9 @@ async function minSubArraySWA(arr, k) {
     try {
         let err = await errHandleMinSubArray(arr, k);
 
-        if (err.isError) {
+        if (err.isError) { //if error comes
             console.log(err.msg)
+            return false
         }   
         else {
             const length = arr.length - k;

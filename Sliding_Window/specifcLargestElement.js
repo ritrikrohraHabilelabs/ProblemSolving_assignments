@@ -1,10 +1,7 @@
 // @param {Array} arr
-// @param {Number} k
+// @param {Number} k -> specific largest number, for examples- third highest(3), second highest(2)
 
 function specificLargestNum(arr, k) {
-
-    
-
     arr.sort((a, b) => b - a);
     let length = arr.length;
     let temp = arr[0];
@@ -19,7 +16,5 @@ function specificLargestNum(arr, k) {
         }
     }
 }
-
-//[5,5,4,3,2,1]
 
 specificLargestNum([1,1,2,2,2,3,3,4], 2)

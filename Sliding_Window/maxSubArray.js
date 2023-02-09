@@ -3,7 +3,36 @@
 //@param {Array} arr , accepts an array of length equal or greater than 'k'
 //@param (Number) k , accepts a number that denotes length of subArray
 
-function maxSubArray(arr, k) {
+async function maxSubArray(arr, k) {
+
+    try {
+        let err = await errHandleMinSubArray(arr, k);
+
+        if (err.isError) {
+            console.log(err.msg)
+            return false
+        }
+        else {
+            const length = arr.length - k;
+            let sum = 0 //initializing sum
+            let minSum; //minSum gets stored
+            for (let i = 0; i < k; i++) {
+                sum += arr[i];
+            }
+            minSum = sum;
+            for (let i = 1; i <= length; i++) {
+                sum = sum - arr[i - 1] + arr[i + k - 1]
+                if (minSum > sum) {
+                    minSum = sum
+                }
+            }
+            return console.log("SLIDING WINDOW -> ", minSum);
+        }
+    }
+    catch (err) {
+        console.log(err);
+        return false
+    }
 
     const length = arr.length - k; //length of the array till subtracted by the subarray length
     let maxSum; //maxSum gets stored
@@ -20,55 +49,7 @@ function maxSubArray(arr, k) {
 
 }
 
-// --------------------------------------------
-
-//-----SLIDING WINDOW APPROACH-----
-
-//@param {Array} arr , accepts an array of length equal or greater than 'k'
-//@param (Number) k , accepts a number that denotes length of subArray
-
-//SWA means SLIDING WINDOW APPROACH
-
-async function maxSubArraySWA(arr, k) {
-
-    try {
-        let err = await errHandleMaxSubArray(arr, k);
-
-        if (err.isError) {
-            console.log(err.msg)
-        }   
-        else {
-            const length = arr.length - k;
-            let sum = 0 //initializing sum
-            let maxSum; //maxSum gets stored
-            for (let i = 0; i < k; i++) {
-                sum += arr[i];
-            }
-            maxSum = sum;
-            for (let i = 1; i <= length; i++) {
-                sum = sum - arr[i - 1] + arr[i + k - 1]
-                if (maxSum < sum) {
-                    maxSum = sum
-                }
-            }
-            return console.log("SLIDING WINDOW -> ", maxSum);
-        }
-
-        // else {
-        //     throw "ERROR HANDLING"
-        // }
-    }
-    catch (err) {
-        console.log(err);
-        return false
-    }
-}
-
-// maxSubArray([2, 3, -2, -4, 6, 7, 8, 1], 3)
-
-maxSubArraySWA([0, -1, -4, 1, 0, 1, 1], 3)
-
-async function errHandleMaxSubArray(arr, k) {
+async function errHandleMinSubArray(arr, k) {
     try {
         if (arr.length < k) {
             return {
